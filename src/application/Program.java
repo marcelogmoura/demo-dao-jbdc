@@ -1,9 +1,11 @@
 package application;
 
+import java.util.List;
 import java.util.Scanner;
 
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
+import model.entities.Department;
 import model.entities.Seller;
 
 public class Program {
@@ -16,12 +18,23 @@ public class Program {
 		
 		System.out.println("= = TEST # 01: seller findById = =");
 		System.out.print("Digite o id a ser pesquisado: ");
-		int pesquisa = scan.nextInt();
+		int pesquisaId = scan.nextInt();
 
-		Seller seller = sellerDao.findById(pesquisa);
-		
+		Seller seller = sellerDao.findById(pesquisaId);		
 		System.out.println(seller);
-
+		
+		System.out.println("\n= = TEST # 02: seller findByDepartment = =");
+		System.out.print("Digite o Departamento a ser pesquisado: ");
+	    int pesquisaDepartamento = scan.nextInt();
+		
+		Department department = new Department(pesquisaDepartamento , null);
+		List<Seller> list = sellerDao.findByDepartment(department);
+		
+		for(Seller obj : list) {
+			System.out.println(obj);
+		}
+		
+		
 	}
 	
 }
